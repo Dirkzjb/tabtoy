@@ -2,6 +2,7 @@
 Version=3.1.1
 
 export GOARCH=amd64
+export GOPROXY=http://goproxy.cn
 BuildSourcePackage="github.com/davyxu/tabtoy/build"
 
 BuildBinary()
@@ -20,8 +21,6 @@ BuildBinary()
   tar zcvf "${PackageDir}"/tabtoy-${Version}-"${1}"-x86_64.tar.gz tabtoy
   cd "${PackageDir}"
 }
-
-
 
 BuildBinary windows
 BuildBinary linux
