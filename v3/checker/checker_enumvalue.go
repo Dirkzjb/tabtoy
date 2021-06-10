@@ -1,8 +1,8 @@
 package checker
 
 import (
-	"github.com/davyxu/tabtoy/v3/model"
-	"github.com/davyxu/tabtoy/v3/report"
+	"github.com/Dirkzjb/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/report"
 )
 
 // 枚举值的解析是放在输出端处理的, 例如json中, 所以在这里提前检查

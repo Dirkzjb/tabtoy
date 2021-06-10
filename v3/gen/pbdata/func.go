@@ -1,7 +1,7 @@
 package pbdata
 
 import (
-	"github.com/davyxu/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/model"
 	"github.com/golang/protobuf/proto"
 	descriptorpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"google.golang.org/protobuf/reflect/protoreflect"

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	tabtoy "github.com/davyxu/tabtoy/v3/api/golang"
+	tabtoy "github.com/Dirkzjb/tabtoy/v3/api/golang"
 	"os"
 )
 

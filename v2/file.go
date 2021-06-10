@@ -1,11 +1,11 @@
 package v2
 
 import (
-	"github.com/davyxu/tabtoy/util"
+	"github.com/Dirkzjb/tabtoy/util"
 	"strings"
 
-	"github.com/davyxu/tabtoy/v2/i18n"
-	"github.com/davyxu/tabtoy/v2/model"
+	"github.com/Dirkzjb/tabtoy/v2/i18n"
+	"github.com/Dirkzjb/tabtoy/v2/model"
 	"github.com/tealeg/xlsx"
 )
 

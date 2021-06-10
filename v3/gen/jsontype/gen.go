@@ -2,7 +2,7 @@ package jsontype
 
 import (
 	"encoding/json"
-	"github.com/davyxu/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/model"
 	"sort"
 )
 
@@ -45,7 +45,7 @@ func Generate(globals *model.Globals) (data []byte, err error) {
 
 	var f File
 	f.Version = globals.Version
-	f.Tool = "github.com/davyxu/tabtoy"
+	f.Tool = "github.com/Dirkzjb/tabtoy"
 
 	for _, obj := range objByType {
 		f.Objects = append(f.Objects, obj)

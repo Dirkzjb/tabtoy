@@ -1,10 +1,10 @@
 package gosrc
 
 import (
+	"github.com/Dirkzjb/tabtoy/v3/gen"
+	"github.com/Dirkzjb/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/report"
 	"github.com/davyxu/protoplus/codegen"
-	"github.com/davyxu/tabtoy/v3/gen"
-	"github.com/davyxu/tabtoy/v3/model"
-	"github.com/davyxu/tabtoy/v3/report"
 )
 
 func Generate(globals *model.Globals) (data []byte, err error) {

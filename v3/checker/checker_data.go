@@ -1,8 +1,8 @@
 package checker
 
 import (
-	"github.com/davyxu/tabtoy/v3/model"
-	"github.com/davyxu/tabtoy/v3/report"
+	"github.com/Dirkzjb/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/report"
 	"strconv"
 )
 

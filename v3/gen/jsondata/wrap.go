@@ -1,7 +1,7 @@
 package jsondata
 
 import (
-	"github.com/davyxu/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/model"
 	"strconv"
 )
 

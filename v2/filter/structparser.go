@@ -1,9 +1,9 @@
 package filter
 
 import (
+	"github.com/Dirkzjb/tabtoy/v2/i18n"
+	"github.com/Dirkzjb/tabtoy/v2/model"
 	"github.com/davyxu/golexer"
-	"github.com/davyxu/tabtoy/v2/i18n"
-	"github.com/davyxu/tabtoy/v2/model"
 )
 
 // 自定义的token id

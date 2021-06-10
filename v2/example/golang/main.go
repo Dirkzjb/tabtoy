@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/davyxu/tabtoy/v2/example/golang/table"
+	"github.com/Dirkzjb/tabtoy/v2/example/golang/table"
 )
 
 func main() {

@@ -1,9 +1,9 @@
 package cssrc
 
 import (
+	"github.com/Dirkzjb/tabtoy/v3/gen"
+	"github.com/Dirkzjb/tabtoy/v3/model"
 	"github.com/davyxu/protoplus/codegen"
-	"github.com/davyxu/tabtoy/v3/gen"
-	"github.com/davyxu/tabtoy/v3/model"
 )
 
 func Generate(globals *model.Globals) (data []byte, err error) {

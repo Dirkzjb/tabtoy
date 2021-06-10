@@ -1,10 +1,10 @@
 package v2tov3
 
 import (
+	"github.com/Dirkzjb/tabtoy/v2tov3/model"
+	"github.com/Dirkzjb/tabtoy/v3/helper"
+	v3model "github.com/Dirkzjb/tabtoy/v3/model"
 	"github.com/davyxu/golexer"
-	"github.com/davyxu/tabtoy/v2tov3/model"
-	"github.com/davyxu/tabtoy/v3/helper"
-	v3model "github.com/davyxu/tabtoy/v3/model"
 	"github.com/tealeg/xlsx"
 	"strings"
 )

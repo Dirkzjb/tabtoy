@@ -3,8 +3,8 @@ package printer
 import (
 	"encoding/json"
 
-	"github.com/davyxu/tabtoy/v2/i18n"
-	"github.com/davyxu/tabtoy/v2/model"
+	"github.com/Dirkzjb/tabtoy/v2/i18n"
+	"github.com/Dirkzjb/tabtoy/v2/model"
 )
 
 type typePrinter struct {
@@ -41,7 +41,7 @@ func (self *typePrinter) Run(g *Globals) *Stream {
 	bf := NewStream()
 
 	var fm typeFileModel
-	fm.Tool = "github.com/davyxu/tabtoy"
+	fm.Tool = "github.com/Dirkzjb/tabtoy"
 	fm.Version = g.Version
 
 	// 遍历所有类型
