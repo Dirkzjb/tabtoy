@@ -21,11 +21,21 @@ const (
 	FieldType_Table  FieldType = 10 // 表格, 仅限二进制使用
 )
 
+type FieldAuthz int
+
+const (
+	FieldAuthz_ClientServer FieldAuthz = 0
+	FieldAuthz_Client       FieldAuthz = 1
+	FieldAuthz_Server       FieldAuthz = 2
+)
+
 // 一列的描述
 type FieldDescriptor struct {
 	Name string
 
 	Type FieldType
+
+	Authz FieldAuthz // 权限
 
 	Complex *Descriptor // 复杂类型: 枚举或者结构体
 
