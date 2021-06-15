@@ -7,14 +7,16 @@ import (
 )
 
 var builtinTag = map[string]bool{
-	"MakeIndex":   true,
-	"Alias":       true,
-	"Default":     true,
-	"ListSpliter": true,
-	"RepeatCheck": true,
-	"TableName":   true,
-	"Package":     true,
-	"OutputTag":   true,
+	"MakeIndex":     true,
+	"Alias":         true,
+	"Default":       true,
+	"ListSpliter":   true,
+	"RepeatCheck":   true,
+	"TableName":     true,
+	"Package":       true,
+	"OutputTag":     true,
+	"CSClassHeader": true,
+	"TablePerm":     true,
 }
 
 func IsSystemTag(tag string) bool {

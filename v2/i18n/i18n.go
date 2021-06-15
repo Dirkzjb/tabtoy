@@ -55,6 +55,7 @@ const (
 	TypeSheet_DuplicateFieldName
 	Printer_IgnoredByOutputTag
 	Printer_OpenWriteOutputFileFailed
+	Printer_IgnoredByTablePerm
 	System_OpenReadXlsxFailed
 )
 

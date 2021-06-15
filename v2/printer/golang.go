@@ -454,6 +454,12 @@ func collectAllStructInfo(g *Globals, fm *goFileModel) {
 			continue
 		}
 
+		// 被表权限限制输出
+		if !d.File.MatchPerm(fm.permission) {
+			log.Infof("%s: %s", i18n.String(i18n.Printer_IgnoredByTablePerm), d.Name)
+			continue
+		}
+
 		structM := &goStructModel{Descriptor: d}
 
 		// 遍历字段

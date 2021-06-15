@@ -51,6 +51,7 @@ func init() {
 		TypeSheet_DuplicateFieldName:                          "[TT714] TypeSheet: Duplicate field name",
 		Printer_IgnoredByOutputTag:                            "[TT801] Printer: Ignored by 'OutputTag' in @Types",
 		Printer_OpenWriteOutputFileFailed:                     "[TT802] Printer: Open write output file failed,",
+		Printer_IgnoredByTablePerm:                            "[TT803] Printer: Ignored by 'TablePerm' in @Types",
 		System_OpenReadXlsxFailed:                             "[TT901] Open read Xlsx failed, ",
 	})
 }

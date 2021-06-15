@@ -248,7 +248,7 @@ func (self *FieldDescriptor) ParseType(fileD *FileDescriptor, rawstr string) boo
 
 func (self *FieldDescriptor) ParsePermission(permissionstr string) error {
 	switch strings.ToLower(strings.TrimSpace(permissionstr)) {
-	case "cs":
+	case "cs", "sc":
 		self.Permission = FieldPermission_ClientServer
 	case "c":
 		self.Permission = FieldPermission_Client

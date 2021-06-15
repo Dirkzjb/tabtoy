@@ -51,6 +51,7 @@ func init() {
 		TypeSheet_DuplicateFieldName:                          "[TT714] 类型表: 重复的字段名",
 		Printer_IgnoredByOutputTag:                            "[TT801] 输出器: @Types的'OutputTag'忽略了目标",
 		Printer_OpenWriteOutputFileFailed:                     "[TT802] 输出器: 打开输出文件失败,",
+		Printer_IgnoredByTablePerm:                            "[TT803] 输出器: @Types的'TablePerm'忽略了目标",
 		System_OpenReadXlsxFailed:                             "[TT901] 打开读取电子表格失败:",
 	})
 }
