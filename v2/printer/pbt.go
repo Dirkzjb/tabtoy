@@ -61,6 +61,7 @@ func printTablePBT(bf *Stream, tab *model.Table, perm model.FieldPermission) boo
 				continue
 			}
 
+			// 这个字段没有权限输出
 			if node.Permission&perm == 0 {
 				continue
 			}
