@@ -6,7 +6,9 @@ import (
 	"github.com/Dirkzjb/tabtoy/v2"
 	"github.com/Dirkzjb/tabtoy/v2/i18n"
 	"github.com/Dirkzjb/tabtoy/v2/printer"
+	"io/ioutil"
 	"os"
+	"path"
 )
 
 // v2特有
@@ -29,9 +31,9 @@ func V2Entry() {
 
 	g.Version = build.Version
 
-	for _, v := range flag.Args() {
+	/*for _, v := range flag.Args() {
 		g.InputFileList = append(g.InputFileList, v)
-	}
+	}*/
 
 	g.ParaMode = *paramPara
 	g.CacheDir = *paramCacheDir
@@ -42,6 +44,34 @@ func V2Entry() {
 	g.LuaTabHeader = *paramLuaTabHeader
 	g.GenCSSerailizeCode = *paramGenCSharpBinarySerializeCode
 	g.PackageName = *paramPackageName
+
+	if *paramFileInputDir != "" {
+		// 读取当前目录中的所有文件和子目录
+		files, err := ioutil.ReadDir(*paramFileInputDir)
+		if err != nil {
+			panic(err)
+		}
+
+		g.InputFileList = append(g.InputFileList, "Globals.xlsx")
+		for _, file := range files {
+			fileName := file.Name()
+			if fileName == "Globals.xlsx" {
+				continue
+			}
+
+			fileExt := path.Ext(fileName)
+			if fileExt != ".xlsx" {
+				continue
+			}
+
+			pre := fileName[0:2]
+			if pre == "~$" {
+				continue
+			}
+
+			g.InputFileList = append(g.InputFileList, fileName)
+		}
+	}
 
 	if *paramProtoOut != "" {
 		g.AddOutputType("proto", *paramProtoOut)

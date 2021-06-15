@@ -52,6 +52,7 @@ var (
 	paramTypeOut         = flag.String("type_out", "", "output table types(*.json)")
 	paramCppOut          = flag.String("cpp_out", "", "output c++ format (*.cpp)")
 	paramJavaOut         = flag.String("java_out", "", "output java code (*.java)")
+	paramFileInputDir= flag.String("InputDir", "", "input file dir")
 
 	// 按表多文件导出
 	paramJsonDir     = flag.String("json_dir", "", "output json format (*.json) to dir")
