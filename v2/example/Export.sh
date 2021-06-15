@@ -1,16 +1,11 @@
 #!/usr/bin/env bash
-../../../../../../bin/tabtoy \
+set DIR="%cd%"
+./tabtoy \
 --mode=v2 \
---csharp_out=./csharp/Example/Config.cs \
---binary_out=./csharp/Example/Config.bin \
---lua_out=./lua/Config.lua \
---proto_out=./pb/proto.proto \
---pbt_out=./pb/data.pbt \
---luaenumintvalue=true \
---go_out=./golang/table/table_gen.go \
---json_out=./golang/Config.json \
---cpp_out=./cpp/cpp/Config.h \
+--csharp_client_out=./csharp/Example/Config.cs \
+--binary_client_out=./csharp/Example/Config.bin \
+--go_server_out=.\golang\table\table_gen.go \
+--pbt_server_out=.\pb\data.pbt \
 --combinename=Config \
 --lan=zh_cn \
-Globals.xlsx \
-Sample.xlsx
+--InputDir=%DIR%
