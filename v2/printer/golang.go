@@ -377,6 +377,7 @@ type goFileModel struct {
 	Structs        []*goStructModel
 	Enums          []*goStructModel
 	IndexCount     int
+	permission     model.FieldPermission
 
 	// 配置的字段
 	VerticalFields []*goFieldModel
@@ -395,6 +396,7 @@ func (self *goFileModel) Package() string {
 }
 
 type goPrinter struct {
+	permission model.FieldPermission
 }
 
 func collectIndexInfo(g *Globals, fm *goFileModel) {
@@ -456,6 +458,11 @@ func collectAllStructInfo(g *Globals, fm *goFileModel) {
 		// 遍历字段
 		for index, fd := range d.Fields {
 
+			// 这个字段没有权限输出
+			if fd.Permission&fm.permission == 0 {
+				continue
+			}
+
 			// 对CombineStruct的XXDefine对应的字段
 			if d.Usage == model.DescriptorUsage_CombineStruct {
 
@@ -503,6 +510,7 @@ func (self *goPrinter) Run(g *Globals) *Stream {
 	var fm goFileModel
 	fm.ToolVersion = g.Version
 	fm.FileDescriptor = g.FileDescriptor
+	fm.permission = self.permission
 
 	collectIndexInfo(g, &fm)
 	collectAllStructInfo(g, &fm)
@@ -545,6 +553,7 @@ func formatCode(bf *bytes.Buffer) error {
 
 func init() {
 
-	RegisterPrinter("go", &goPrinter{})
-
+	RegisterPrinter("go", &goPrinter{permission: model.FieldPermission_ClientServer})
+	RegisterPrinter("go_server", &goPrinter{permission: model.FieldPermission_Server})
+	RegisterPrinter("go_client", &goPrinter{permission: model.FieldPermission_Client})
 }

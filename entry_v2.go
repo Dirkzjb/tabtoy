@@ -51,6 +51,14 @@ func V2Entry() {
 		g.AddOutputType("pbt", *paramPbtOut)
 	}
 
+	if *paramPbtServerOut != "" {
+		g.AddOutputType("pbt_server", *paramPbtServerOut)
+	}
+
+	if *paramPbtClientOut != "" {
+		g.AddOutputType("pbt_client", *paramPbtClientOut)
+	}
+
 	if *paramJsonOut != "" {
 		g.AddOutputType("json", *paramJsonOut)
 	}
@@ -63,8 +71,24 @@ func V2Entry() {
 		g.AddOutputType("cs", *paramCSharpOut)
 	}
 
+	if *paramCSharpServerOut != "" {
+		g.AddOutputType("cs_server", *paramCSharpServerOut)
+	}
+
+	if *paramCSharpClientOut != "" {
+		g.AddOutputType("cs_client", *paramCSharpClientOut)
+	}
+
 	if *paramGoOut != "" {
 		g.AddOutputType("go", *paramGoOut)
+	}
+
+	if *paramGoServerOut != "" {
+		g.AddOutputType("go_server", *paramGoServerOut)
+	}
+
+	if *paramGoClientOut != "" {
+		g.AddOutputType("go_client", *paramGoClientOut)
 	}
 
 	if *paramCppOut != "" {
@@ -73,6 +97,14 @@ func V2Entry() {
 
 	if *paramBinaryOut != "" {
 		g.AddOutputType("bin", *paramBinaryOut)
+	}
+
+	if *paramBinaryServerOut != "" {
+		g.AddOutputType("bin_server", *paramBinaryServerOut)
+	}
+
+	if *paramBinaryClientOut != "" {
+		g.AddOutputType("bin_client", *paramBinaryClientOut)
 	}
 
 	if *paramTypeOut != "" {

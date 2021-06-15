@@ -11,6 +11,7 @@ import (
 const combineFileVersion = 4
 
 type binaryPrinter struct {
+	permission model.FieldPermission
 }
 
 func (self *binaryPrinter) Run(g *Globals) *Stream {
@@ -33,7 +34,7 @@ func (self *binaryPrinter) Run(g *Globals) *Stream {
 			continue
 		}
 
-		if !writeTableBinary(fileStresam, tab, int32(index)) {
+		if !writeTableBinary(fileStresam, tab, int32(index), self.permission) {
 			return nil
 		}
 
@@ -52,7 +53,7 @@ func (self *binaryPrinter) Run(g *Globals) *Stream {
 	return fileStresam
 }
 
-func writeTableBinary(tabStream *Stream, tab *model.Table, index int32) bool {
+func writeTableBinary(tabStream *Stream, tab *model.Table, index int32, perm model.FieldPermission) bool {
 
 	// 遍历每一行
 	for _, r := range tab.Recs {
@@ -63,6 +64,10 @@ func writeTableBinary(tabStream *Stream, tab *model.Table, index int32) bool {
 		for _, node := range r.Nodes {
 
 			if node.SugguestIgnore {
+				continue
+			}
+
+			if node.Permission&perm == 0 {
 				continue
 			}
 
@@ -128,6 +133,7 @@ func writeTableBinary(tabStream *Stream, tab *model.Table, index int32) bool {
 
 func init() {
 
-	RegisterPrinter("bin", &binaryPrinter{})
-
+	RegisterPrinter("bin", &binaryPrinter{permission: model.FieldPermission_ClientServer})
+	RegisterPrinter("bin_server", &binaryPrinter{permission: model.FieldPermission_Server})
+	RegisterPrinter("bin_client", &binaryPrinter{permission: model.FieldPermission_Client})
 }

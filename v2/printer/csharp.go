@@ -378,6 +378,7 @@ type csharpFileModel struct {
 }
 
 type csharpPrinter struct {
+	permission model.FieldPermission
 }
 
 func (self *csharpPrinter) Run(g *Globals) *Stream {
@@ -431,6 +432,11 @@ func (self *csharpPrinter) Run(g *Globals) *Stream {
 
 		// 遍历字段
 		for _, fd := range d.Fields {
+
+			// 这个字段没有权限输出
+			if fd.Permission&self.permission == 0 {
+				continue
+			}
 
 			// 对CombineStruct的XXDefine对应的字段
 			if d.Usage == model.DescriptorUsage_CombineStruct {
@@ -491,6 +497,7 @@ func (self *csharpPrinter) Run(g *Globals) *Stream {
 
 func init() {
 
-	RegisterPrinter("cs", &csharpPrinter{})
-
+	RegisterPrinter("cs", &csharpPrinter{permission: model.FieldPermission_ClientServer})
+	RegisterPrinter("cs_server", &csharpPrinter{permission: model.FieldPermission_Server})
+	RegisterPrinter("cs_client", &csharpPrinter{permission: model.FieldPermission_Client})
 }

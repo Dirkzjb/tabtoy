@@ -21,12 +21,12 @@ const (
 	FieldType_Table  FieldType = 10 // 表格, 仅限二进制使用
 )
 
-type FieldAuthz int
+type FieldPermission uint32
 
 const (
-	FieldAuthz_ClientServer FieldAuthz = 0
-	FieldAuthz_Client       FieldAuthz = 1
-	FieldAuthz_Server       FieldAuthz = 2
+	FieldPermission_Client FieldPermission = 1 << iota
+	FieldPermission_Server
+	FieldPermission_ClientServer = FieldPermission_Client | FieldPermission_Server
 )
 
 // 一列的描述
@@ -35,7 +35,7 @@ type FieldDescriptor struct {
 
 	Type FieldType
 
-	Authz FieldAuthz // 权限
+	Permission FieldPermission // 权限
 
 	Complex *Descriptor // 复杂类型: 枚举或者结构体
 
@@ -54,7 +54,8 @@ type FieldDescriptor struct {
 
 func NewFieldDescriptor() *FieldDescriptor {
 	return &FieldDescriptor{
-		Meta: NewMetaInfo(),
+		Permission: FieldPermission_ClientServer,
+		Meta:       NewMetaInfo(),
 	}
 }
 
@@ -243,6 +244,21 @@ func (self *FieldDescriptor) ParseType(fileD *FileDescriptor, rawstr string) boo
 	}
 
 	return true
+}
+
+func (self *FieldDescriptor) ParsePermission(permissionstr string) error {
+	switch strings.ToLower(strings.TrimSpace(permissionstr)) {
+	case "cs":
+		self.Permission = FieldPermission_ClientServer
+	case "c":
+		self.Permission = FieldPermission_Client
+	case "s":
+		self.Permission = FieldPermission_Server
+	default:
+		return fmt.Errorf("field '%s' permission '%s' not support", self.Name, permissionstr)
+	}
+
+	return nil
 }
 
 func init() {

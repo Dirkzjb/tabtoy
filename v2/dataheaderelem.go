@@ -7,11 +7,11 @@ import (
 )
 
 type DataHeaderElement struct {
-	FieldName  string
-	FieldType  string
-	FieldAuthz string
-	FieldMeta  string
-	Comment    string
+	FieldName       string
+	FieldType       string
+	FieldPermission string
+	FieldMeta       string
+	Comment         string
 }
 
 func checkElement(def *model.FieldDescriptor) int {
@@ -91,6 +91,12 @@ func (self *DataHeaderElement) Parse(def *model.FieldDescriptor, localFD *model.
 	if def.Type == model.FieldType_None {
 		log.Errorf("%s, '%s' (%s) raw: %s", i18n.String(i18n.DataHeader_TypeNotFound), def.Name, model.FieldTypeToString(def.Type), self.FieldType)
 		return DataSheetHeader_FieldType
+	}
+
+	// ====================解析权限====================
+	if err := def.ParsePermission(self.FieldPermission); err != nil {
+		log.Errorf("%s '%s'", i18n.String(i18n.DataHeader_MetaParseFailed), err)
+		return DataSheetHeader_FieldPermission
 	}
 
 	// ====================解析特性====================

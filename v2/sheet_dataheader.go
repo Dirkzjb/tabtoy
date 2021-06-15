@@ -16,12 +16,12 @@ import (
 
 const (
 	// 信息所在的行
-	DataSheetHeader_FieldName  = 0 // 字段名(对应proto)
-	DataSheetHeader_FieldType  = 1 // 字段类型
-	DataSheetHeader_FieldAuthz = 2 // 字段权限
-	DataSheetHeader_FieldMeta  = 3 // 字段特性
-	DataSheetHeader_Comment    = 4 // 用户注释
-	DataSheetHeader_DataBegin  = 5 // 数据开始
+	DataSheetHeader_FieldName       = 0 // 字段名(对应proto)
+	DataSheetHeader_FieldType       = 1 // 字段类型
+	DataSheetHeader_FieldPermission = 2 // 字段权限
+	DataSheetHeader_FieldMeta       = 3 // 字段特性
+	DataSheetHeader_Comment         = 4 // 用户注释
+	DataSheetHeader_DataBegin       = 5 // 数据开始
 )
 
 type DataHeader struct {
@@ -47,11 +47,11 @@ func (self *DataHeader) ParseProtoField(index int, sheet *Sheet, localFD *model.
 		for sheet.Row = 1; ; sheet.Row++ {
 
 			he := &DataHeaderElement{
-				FieldName:  sheet.GetCellData(sheet.Row, DataSheetHeader_FieldName),
-				FieldType:  sheet.GetCellData(sheet.Row, DataSheetHeader_FieldType),
-				FieldAuthz: sheet.GetCellData(sheet.Row, DataSheetHeader_FieldAuthz),
-				FieldMeta:  sheet.GetCellData(sheet.Row, DataSheetHeader_FieldMeta),
-				Comment:    sheet.GetCellData(sheet.Row, DataSheetHeader_Comment),
+				FieldName:       sheet.GetCellData(sheet.Row, DataSheetHeader_FieldName),
+				FieldType:       sheet.GetCellData(sheet.Row, DataSheetHeader_FieldType),
+				FieldPermission: sheet.GetCellData(sheet.Row, DataSheetHeader_FieldPermission),
+				FieldMeta:       sheet.GetCellData(sheet.Row, DataSheetHeader_FieldMeta),
+				Comment:         sheet.GetCellData(sheet.Row, DataSheetHeader_Comment),
 			}
 
 			if he.FieldName == "" {
@@ -72,11 +72,11 @@ func (self *DataHeader) ParseProtoField(index int, sheet *Sheet, localFD *model.
 		for sheet.Column = 0; ; sheet.Column++ {
 
 			he := &DataHeaderElement{
-				FieldName:  sheet.GetCellData(DataSheetHeader_FieldName, sheet.Column),
-				FieldType:  sheet.GetCellData(DataSheetHeader_FieldType, sheet.Column),
-				FieldAuthz: sheet.GetCellData(DataSheetHeader_FieldAuthz, sheet.Column),
-				FieldMeta:  sheet.GetCellData(DataSheetHeader_FieldMeta, sheet.Column),
-				Comment:    sheet.GetCellData(DataSheetHeader_Comment, sheet.Column),
+				FieldName:       sheet.GetCellData(DataSheetHeader_FieldName, sheet.Column),
+				FieldType:       sheet.GetCellData(DataSheetHeader_FieldType, sheet.Column),
+				FieldPermission: sheet.GetCellData(DataSheetHeader_FieldPermission, sheet.Column),
+				FieldMeta:       sheet.GetCellData(DataSheetHeader_FieldMeta, sheet.Column),
+				Comment:         sheet.GetCellData(DataSheetHeader_Comment, sheet.Column),
 			}
 
 			if he.FieldName == "" {

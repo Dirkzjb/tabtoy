@@ -17,6 +17,7 @@ func valueWrapperPbt(t model.FieldType, node *model.Node) string {
 }
 
 type pbtPrinter struct {
+	permission model.FieldPermission
 }
 
 func (self *pbtPrinter) Run(g *Globals) *Stream {
@@ -32,7 +33,7 @@ func (self *pbtPrinter) Run(g *Globals) *Stream {
 			continue
 		}
 
-		if !printTablePBT(bf, tab) {
+		if !printTablePBT(bf, tab, self.permission) {
 			return nil
 		}
 	}
@@ -40,7 +41,7 @@ func (self *pbtPrinter) Run(g *Globals) *Stream {
 	return bf
 }
 
-func printTablePBT(bf *Stream, tab *model.Table) bool {
+func printTablePBT(bf *Stream, tab *model.Table, perm model.FieldPermission) bool {
 
 	if len(tab.Recs) == 0 {
 		return true
@@ -57,6 +58,10 @@ func printTablePBT(bf *Stream, tab *model.Table) bool {
 		for rootFieldIndex, node := range r.Nodes {
 
 			if node.SugguestIgnore && !node.IsRepeated {
+				continue
+			}
+
+			if node.Permission&perm == 0 {
 				continue
 			}
 
@@ -155,6 +160,7 @@ func printTablePBT(bf *Stream, tab *model.Table) bool {
 
 func init() {
 
-	RegisterPrinter("pbt", &pbtPrinter{})
-
+	RegisterPrinter("pbt", &pbtPrinter{permission: model.FieldPermission_ClientServer})
+	RegisterPrinter("pbt_server", &pbtPrinter{permission: model.FieldPermission_Server})
+	RegisterPrinter("pbt_client", &pbtPrinter{permission: model.FieldPermission_Client})
 }
