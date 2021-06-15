@@ -54,6 +54,8 @@ func (self *Descriptor) Add(def *FieldDescriptor) error {
 
 	// 创建索引
 	if def.Meta.GetBool("MakeIndex") {
+		// 索引字段无视权限
+		def.Permission = FieldPermission_ClientServer
 
 		if _, ok := self.IndexByName[def.Name]; ok {
 			return ErrDuplicateIndexName

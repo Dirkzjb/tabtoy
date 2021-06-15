@@ -81,6 +81,7 @@ type {{$.Name}}Table struct{
 	postFuncList []func(*{{$.Name}}Table) error
 	
 	{{range $a, $strus := .IndexedStructs}} {{range .Indexes}}
+	// 索引{{.Name}}
 	{{$strus.Name}}By{{.Name}} map[{{.KeyType}}]*{{$strus.TypeName}}
 	{{end}} {{end}}
 }
@@ -276,7 +277,7 @@ func (self *goFieldModel) Comment() string {
 
 	if self.FieldDescriptor.Comment != "" {
 		if out == "" {
-			out += "//"
+			out += "// "
 		}
 		out += self.FieldDescriptor.Comment
 	}
