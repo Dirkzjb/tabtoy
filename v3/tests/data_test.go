@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"github.com/davyxu/tabtoy/v3/helper"
+	"github.com/Dirkzjb/tabtoy/v3/helper"
 	"testing"
 )
 
@@ -31,7 +31,7 @@ func TestDisableDataRow(t *testing.T) {
 
 	emu.VerifyData(`
 {
-	"@Tool": "github.com/davyxu/tabtoy",
+	"@Tool": "github.com/Dirkzjb/tabtoy",
 	"@Version": "testver",	
 	"TestData":[ 
 		{ "Int": 100, "String": "\"hello1\"", "Bool": false, "Float": 0 },
@@ -96,7 +96,7 @@ func TestArrayList(t *testing.T) {
 
 	emu.VerifyData(`
 {
-        	"@Tool": "github.com/davyxu/tabtoy",
+        	"@Tool": "github.com/Dirkzjb/tabtoy",
         	"@Version": "testver",	
         	"TestData":[ 
         		{ "ID": 1, "SkillList": [100,200,300], "NameList": ["",""], "IDList": [1, 2] },
@@ -181,7 +181,7 @@ func TestArraySpliter(t *testing.T) {
 
 	emu.VerifyData(`
 {
-        	"@Tool": "github.com/davyxu/tabtoy",
+        	"@Tool": "github.com/Dirkzjb/tabtoy",
         	"@Version": "testver",	
         	"TestData":[ 
         		{ "Week": ["1|2|3", "4|5|6"] } 
@@ -210,7 +210,7 @@ func TestArraySpliter(t *testing.T) {
 //
 //	emu.VerifyData(`
 //{
-//        	"@Tool": "github.com/davyxu/tabtoy",
+//        	"@Tool": "github.com/Dirkzjb/tabtoy",
 //        	"@Version": "testver",
 //        	"TestData":[
 //        		{ "Week": ["1|2|3", "4|5|6"] }

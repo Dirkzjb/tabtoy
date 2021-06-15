@@ -2,10 +2,10 @@ package main
 
 import (
 	"flag"
-	"github.com/davyxu/tabtoy/build"
-	"github.com/davyxu/tabtoy/v2"
-	"github.com/davyxu/tabtoy/v2/i18n"
-	"github.com/davyxu/tabtoy/v2/printer"
+	"github.com/Dirkzjb/tabtoy/build"
+	"github.com/Dirkzjb/tabtoy/v2"
+	"github.com/Dirkzjb/tabtoy/v2/i18n"
+	"github.com/Dirkzjb/tabtoy/v2/printer"
 	"io/ioutil"
 	"os"
 	"path"

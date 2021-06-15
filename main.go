@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/Dirkzjb/tabtoy/build"
 	"github.com/davyxu/golog"
-	"github.com/davyxu/tabtoy/build"
 	"github.com/pkg/profile"
 	"os"
 )

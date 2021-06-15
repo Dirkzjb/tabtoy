@@ -1,10 +1,10 @@
 package compiler
 
 import (
-	"github.com/davyxu/tabtoy/v3/checker"
-	"github.com/davyxu/tabtoy/v3/helper"
-	"github.com/davyxu/tabtoy/v3/model"
-	"github.com/davyxu/tabtoy/v3/report"
+	"github.com/Dirkzjb/tabtoy/v3/checker"
+	"github.com/Dirkzjb/tabtoy/v3/helper"
+	"github.com/Dirkzjb/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/report"
 )
 
 func Compile(globals *model.Globals) (ret error) {

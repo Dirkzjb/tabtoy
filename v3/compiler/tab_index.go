@@ -1,7 +1,7 @@
 package compiler
 
 import (
-	"github.com/davyxu/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/model"
 	"path/filepath"
 	"sort"
 	"strings"

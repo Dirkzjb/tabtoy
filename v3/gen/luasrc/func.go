@@ -1,8 +1,8 @@
 package luasrc
 
 import (
-	"github.com/davyxu/tabtoy/v3/gen"
-	"github.com/davyxu/tabtoy/v3/model"
+	"github.com/Dirkzjb/tabtoy/v3/gen"
+	"github.com/Dirkzjb/tabtoy/v3/model"
 	"strings"
 	"text/template"
 )

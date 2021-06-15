@@ -1,16 +1,17 @@
 package v2
 
 import (
-	"github.com/davyxu/tabtoy/v2/i18n"
-	"github.com/davyxu/tabtoy/v2/model"
+	"github.com/Dirkzjb/tabtoy/v2/i18n"
+	"github.com/Dirkzjb/tabtoy/v2/model"
 	"strings"
 )
 
 type DataHeaderElement struct {
-	FieldName string
-	FieldType string
-	FieldMeta string
-	Comment   string
+	FieldName  string
+	FieldType  string
+	FieldAuthz string
+	FieldMeta  string
+	Comment    string
 }
 
 func checkElement(def *model.FieldDescriptor) int {

@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"github.com/davyxu/tabtoy/v3/helper"
+	"github.com/Dirkzjb/tabtoy/v3/helper"
 	"testing"
 )
 
@@ -102,7 +102,7 @@ func TestEnumValue(t *testing.T) {
 
 	emu.VerifyData(`
 {
-	"@Tool": "github.com/davyxu/tabtoy",
+	"@Tool": "github.com/Dirkzjb/tabtoy",
 	"@Version": "testver",	
 	"TestData":[ 
 		{ "Type": 1, "Index": 0 },
@@ -161,7 +161,7 @@ func TestEmptyEnumValue(t *testing.T) {
 
 	emu.VerifyData(`
 {
-			"@Tool": "github.com/davyxu/tabtoy",
+			"@Tool": "github.com/Dirkzjb/tabtoy",
         	"@Version": "testver",	
         	"TestData":[ 
         		{ "ID": 1, "Type": 1 } 

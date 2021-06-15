@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/davyxu/tabtoy/v3/helper"
+	"github.com/Dirkzjb/tabtoy/v3/helper"
 )
 
 type Globals struct {
