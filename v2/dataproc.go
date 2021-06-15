@@ -10,9 +10,13 @@ import (
 
 func coloumnProcessor(file model.GlobalChecker, record *model.Record, fd *model.FieldDescriptor, raw string, sugguestIgnore bool) bool {
 
-	spliter := fd.ListSpliter()
+	if fd.IsRepeated {
 
-	if fd.IsRepeated && spliter != "" {
+		// 默认使用“|”分隔
+		spliter := fd.ListSpliter()
+		if spliter == "" {
+			spliter = "|"
+		}
 
 		valueList := strings.Split(raw, spliter)
 
