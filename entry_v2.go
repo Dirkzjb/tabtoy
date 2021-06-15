@@ -31,9 +31,9 @@ func V2Entry() {
 
 	g.Version = build.Version
 
-	/*for _, v := range flag.Args() {
+	for _, v := range flag.Args() {
 		g.InputFileList = append(g.InputFileList, v)
-	}*/
+	}
 
 	g.ParaMode = *paramPara
 	g.CacheDir = *paramCacheDir
