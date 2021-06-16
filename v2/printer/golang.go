@@ -189,7 +189,6 @@ func (self *{{$.Name}}Table) RegisterPostEntry(callback func(*{{$.Name}}Table) e
 // 创建一个{{$.Name}}表读取实例
 func New{{$.Name}}Table() *{{$.Name}}Table {
 	return &{{$.Name}}Table{
-
 	
 		indexFuncByName: map[string][]func(*{{$.Name}}Table) error{
 		
@@ -221,17 +220,15 @@ func New{{$.Name}}Table() *{{$.Name}}Table {
 			"{{$strus.Name}}": {func(tab *{{$.Name}}Table) error{
 				
 				// {{$strus.Name}}
-	
+
 				{{range .Indexes}}
 				tab.{{$strus.Name}}By{{.Name}} = make(map[{{.KeyType}}]*{{$strus.TypeName}}){{end}}
 
 				return nil
 			}},
 		{{end}}
-		
 			
 		},
-		
 
 		{{range $a, $strus := .IndexedStructs}} {{range .Indexes}}
 		{{$strus.Name}}By{{.Name}} : make(map[{{.KeyType}}]*{{$strus.TypeName}}),
@@ -239,8 +236,6 @@ func New{{$.Name}}Table() *{{$.Name}}Table {
 		
 	}
 }
-
-
 `
 
 // 每个带有MakeIndex的列
