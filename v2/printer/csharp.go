@@ -378,7 +378,7 @@ type csharpFileModel struct {
 }
 
 type csharpPrinter struct {
-	permission model.FieldPermission
+	permission model.Perm
 }
 
 func (self *csharpPrinter) Run(g *Globals) *Stream {
@@ -408,6 +408,11 @@ func (self *csharpPrinter) Run(g *Globals) *Stream {
 			continue
 		}
 
+		// 被表权限限制输出
+		if !ti.Index.Parent.File.MatchPerm(self.permission) {
+			continue
+		}
+
 		m.Indexes = append(m.Indexes, indexField{TableIndex: ti})
 	}
 
@@ -417,6 +422,12 @@ func (self *csharpPrinter) Run(g *Globals) *Stream {
 		// 这给被限制输出
 		if !d.File.MatchTag(".cs") {
 			log.Infof("%s: %s", i18n.String(i18n.Printer_IgnoredByOutputTag), d.Name)
+			continue
+		}
+
+		// 被表权限限制输出
+		if !d.File.MatchPerm(self.permission) {
+			log.Infof("%s: %s", i18n.String(i18n.Printer_IgnoredByTablePerm), d.Name)
 			continue
 		}
 
@@ -434,7 +445,7 @@ func (self *csharpPrinter) Run(g *Globals) *Stream {
 		for _, fd := range d.Fields {
 
 			// 这个字段没有权限输出
-			if fd.Permission&self.permission == 0 {
+			if !fd.MatchPerm(self.permission) {
 				continue
 			}
 
@@ -497,7 +508,7 @@ func (self *csharpPrinter) Run(g *Globals) *Stream {
 
 func init() {
 
-	RegisterPrinter("cs", &csharpPrinter{permission: model.FieldPermission_ClientServer})
-	RegisterPrinter("cs_server", &csharpPrinter{permission: model.FieldPermission_Server})
-	RegisterPrinter("cs_client", &csharpPrinter{permission: model.FieldPermission_Client})
+	RegisterPrinter("cs", &csharpPrinter{permission: model.Perm_ClientServer})
+	RegisterPrinter("cs_server", &csharpPrinter{permission: model.Perm_Server})
+	RegisterPrinter("cs_client", &csharpPrinter{permission: model.Perm_Client})
 }

@@ -11,7 +11,7 @@ import (
 const combineFileVersion = 4
 
 type binaryPrinter struct {
-	permission model.FieldPermission
+	permission model.Perm
 }
 
 func (self *binaryPrinter) Run(g *Globals) *Stream {
@@ -34,6 +34,12 @@ func (self *binaryPrinter) Run(g *Globals) *Stream {
 			continue
 		}
 
+		// 被表权限限制输出
+		if !tab.LocalFD.MatchPerm(self.permission) {
+			log.Infof("%s: %s", i18n.String(i18n.Printer_IgnoredByTablePerm), tab.Name())
+			continue
+		}
+
 		if !writeTableBinary(fileStresam, tab, int32(index), self.permission) {
 			return nil
 		}
@@ -53,7 +59,7 @@ func (self *binaryPrinter) Run(g *Globals) *Stream {
 	return fileStresam
 }
 
-func writeTableBinary(tabStream *Stream, tab *model.Table, index int32, perm model.FieldPermission) bool {
+func writeTableBinary(tabStream *Stream, tab *model.Table, index int32, perm model.Perm) bool {
 
 	// 遍历每一行
 	for _, r := range tab.Recs {
@@ -67,7 +73,7 @@ func writeTableBinary(tabStream *Stream, tab *model.Table, index int32, perm mod
 				continue
 			}
 
-			if node.Permission&perm == 0 {
+			if !node.MatchPerm(perm) {
 				continue
 			}
 
@@ -133,7 +139,7 @@ func writeTableBinary(tabStream *Stream, tab *model.Table, index int32, perm mod
 
 func init() {
 
-	RegisterPrinter("bin", &binaryPrinter{permission: model.FieldPermission_ClientServer})
-	RegisterPrinter("bin_server", &binaryPrinter{permission: model.FieldPermission_Server})
-	RegisterPrinter("bin_client", &binaryPrinter{permission: model.FieldPermission_Client})
+	RegisterPrinter("bin", &binaryPrinter{permission: model.Perm_ClientServer})
+	RegisterPrinter("bin_server", &binaryPrinter{permission: model.Perm_Server})
+	RegisterPrinter("bin_client", &binaryPrinter{permission: model.Perm_Client})
 }

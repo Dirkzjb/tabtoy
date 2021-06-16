@@ -17,7 +17,7 @@ func valueWrapperPbt(t model.FieldType, node *model.Node) string {
 }
 
 type pbtPrinter struct {
-	permission model.FieldPermission
+	permission model.Perm
 }
 
 func (self *pbtPrinter) Run(g *Globals) *Stream {
@@ -33,6 +33,12 @@ func (self *pbtPrinter) Run(g *Globals) *Stream {
 			continue
 		}
 
+		// 被表权限限制输出
+		if !tab.LocalFD.MatchPerm(self.permission) {
+			log.Infof("%s: %s", i18n.String(i18n.Printer_IgnoredByTablePerm), tab.Name())
+			continue
+		}
+
 		if !printTablePBT(bf, tab, self.permission) {
 			return nil
 		}
@@ -41,7 +47,7 @@ func (self *pbtPrinter) Run(g *Globals) *Stream {
 	return bf
 }
 
-func printTablePBT(bf *Stream, tab *model.Table, perm model.FieldPermission) bool {
+func printTablePBT(bf *Stream, tab *model.Table, perm model.Perm) bool {
 
 	if len(tab.Recs) == 0 {
 		return true
@@ -62,7 +68,7 @@ func printTablePBT(bf *Stream, tab *model.Table, perm model.FieldPermission) boo
 			}
 
 			// 这个字段没有权限输出
-			if node.Permission&perm == 0 {
+			if !node.MatchPerm(perm) {
 				continue
 			}
 
@@ -161,7 +167,7 @@ func printTablePBT(bf *Stream, tab *model.Table, perm model.FieldPermission) boo
 
 func init() {
 
-	RegisterPrinter("pbt", &pbtPrinter{permission: model.FieldPermission_ClientServer})
-	RegisterPrinter("pbt_server", &pbtPrinter{permission: model.FieldPermission_Server})
-	RegisterPrinter("pbt_client", &pbtPrinter{permission: model.FieldPermission_Client})
+	RegisterPrinter("pbt", &pbtPrinter{permission: model.Perm_ClientServer})
+	RegisterPrinter("pbt_server", &pbtPrinter{permission: model.Perm_Server})
+	RegisterPrinter("pbt_client", &pbtPrinter{permission: model.Perm_Client})
 }

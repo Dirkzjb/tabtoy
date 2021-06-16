@@ -378,7 +378,7 @@ type goFileModel struct {
 	Structs        []*goStructModel
 	Enums          []*goStructModel
 	IndexCount     int
-	permission     model.FieldPermission
+	permission     model.Perm
 
 	// 配置的字段
 	VerticalFields []*goFieldModel
@@ -397,7 +397,7 @@ func (self *goFileModel) Package() string {
 }
 
 type goPrinter struct {
-	permission model.FieldPermission
+	permission model.Perm
 }
 
 func collectIndexInfo(g *Globals, fm *goFileModel) {
@@ -419,6 +419,11 @@ func collectIndexInfo(g *Globals, fm *goFileModel) {
 
 		// 这个字段被限制输出
 		if !fd.Complex.File.MatchTag(".go") {
+			continue
+		}
+
+		// 被表权限限制输出
+		if !fd.Complex.File.MatchPerm(fm.permission) {
 			continue
 		}
 
@@ -466,7 +471,7 @@ func collectAllStructInfo(g *Globals, fm *goFileModel) {
 		for index, fd := range d.Fields {
 
 			// 这个字段没有权限输出
-			if fd.Permission&fm.permission == 0 {
+			if !fd.MatchPerm(fm.permission) {
 				continue
 			}
 
@@ -560,7 +565,7 @@ func formatCode(bf *bytes.Buffer) error {
 
 func init() {
 
-	RegisterPrinter("go", &goPrinter{permission: model.FieldPermission_ClientServer})
-	RegisterPrinter("go_server", &goPrinter{permission: model.FieldPermission_Server})
-	RegisterPrinter("go_client", &goPrinter{permission: model.FieldPermission_Client})
+	RegisterPrinter("go", &goPrinter{permission: model.Perm_ClientServer})
+	RegisterPrinter("go_server", &goPrinter{permission: model.Perm_Server})
+	RegisterPrinter("go_client", &goPrinter{permission: model.Perm_Client})
 }

@@ -16,7 +16,7 @@ var builtinTag = map[string]bool{
 	"Package":       true,
 	"OutputTag":     true,
 	"CSClassHeader": true,
-	"TablePerm":     true,
+	"Perm":          true,
 }
 
 func IsSystemTag(tag string) bool {

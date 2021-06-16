@@ -1,9 +1,5 @@
 package model
 
-import (
-	"strings"
-)
-
 type FileDescriptor struct {
 	Name             string
 	DescriptorByName map[string]*Descriptor
@@ -22,23 +18,12 @@ func (self *FileDescriptor) MatchTag(tag string) bool {
 
 }
 
-func (self *FileDescriptor) MatchPerm(permission FieldPermission) bool {
-	if !self.Pragma.ContainKey("TablePerm") {
+func (self *FileDescriptor) MatchPerm(perm Perm) bool {
+	if !self.Pragma.ContainKey("Perm") {
 		return true
 	}
 
-	tablePerm := self.Pragma.GetString("TablePerm")
-
-	switch strings.ToLower(strings.TrimSpace(tablePerm)) {
-	case "cs", "sc":
-		return permission&FieldPermission_ClientServer != 0
-	case "c":
-		return permission&FieldPermission_Client != 0
-	case "s":
-		return permission&FieldPermission_Server != 0
-	}
-
-	return false
+	return perm.Match(self.Pragma.GetString("Perm"))
 }
 
 // 取行类型的结构

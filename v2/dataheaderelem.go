@@ -7,11 +7,11 @@ import (
 )
 
 type DataHeaderElement struct {
-	FieldName       string
-	FieldType       string
-	FieldPermission string
-	FieldMeta       string
-	Comment         string
+	FieldName string
+	FieldType string
+	FieldPerm string
+	FieldMeta string
+	Comment   string
 }
 
 func checkElement(def *model.FieldDescriptor) int {
@@ -93,16 +93,15 @@ func (self *DataHeaderElement) Parse(def *model.FieldDescriptor, localFD *model.
 		return DataSheetHeader_FieldType
 	}
 
-	// ====================解析权限====================
-	if err := def.ParsePermission(self.FieldPermission); err != nil {
-		log.Errorf("%s '%s'", i18n.String(i18n.DataHeader_MetaParseFailed), err)
-		return DataSheetHeader_FieldPermission
-	}
-
 	// ====================解析特性====================
 	if err := def.Meta.Parse(self.FieldMeta); err != nil {
 		log.Errorf("%s '%s'", i18n.String(i18n.DataHeader_MetaParseFailed), err)
 		return DataSheetHeader_FieldMeta
+	}
+
+	if err := def.ParsePerm(self.FieldPerm); err != nil {
+		log.Errorf("%s '%s'", i18n.String(i18n.DataHeader_FieldPermParseFailed), err)
+		return DataSheetHeader_FieldPerm
 	}
 
 	def.Comment = strings.Replace(self.Comment, "\n", " ", -1)

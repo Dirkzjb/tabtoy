@@ -35,6 +35,7 @@ func init() {
 		DataHeader_NotMatch:                                   "[TT608] DataHeader: Multi sheet data header not match",
 		DataHeader_FieldNotDefinedInMainTableInMultiTableMode: "[TT609] DataHeader: Field not defined in main table, in multi table mode",
 		DataHeader_NotMatchInMultiTableMode:                   "[TT610] DataHeader: Sheet data header not match in multi table mode",
+		DataHeader_FieldPermParseFailed:                       "[TT611] DataHeader: Field Permission parse failed",
 		TypeSheet_PragmaParseFailed:                           "[TT701] TypeSheet: File pragma parse failed",
 		TypeSheet_TableNameIsEmpty:                            "[TT702] TypeSheet: Table name is empty",
 		TypeSheet_PackageIsEmpty:                              "[TT703] TypeSheet: Package is empty",
@@ -51,7 +52,7 @@ func init() {
 		TypeSheet_DuplicateFieldName:                          "[TT714] TypeSheet: Duplicate field name",
 		Printer_IgnoredByOutputTag:                            "[TT801] Printer: Ignored by 'OutputTag' in @Types",
 		Printer_OpenWriteOutputFileFailed:                     "[TT802] Printer: Open write output file failed,",
-		Printer_IgnoredByTablePerm:                            "[TT803] Printer: Ignored by 'TablePerm' in @Types",
+		Printer_IgnoredByTablePerm:                            "[TT803] Printer: Ignored by 'Perm' in @Types",
 		System_OpenReadXlsxFailed:                             "[TT901] Open read Xlsx failed, ",
 	})
 }

@@ -21,21 +21,11 @@ const (
 	FieldType_Table  FieldType = 10 // 表格, 仅限二进制使用
 )
 
-type FieldPermission uint32
-
-const (
-	FieldPermission_Client FieldPermission = 1 << iota
-	FieldPermission_Server
-	FieldPermission_ClientServer = FieldPermission_Client | FieldPermission_Server
-)
-
 // 一列的描述
 type FieldDescriptor struct {
 	Name string
 
 	Type FieldType
-
-	Permission FieldPermission // 权限
 
 	Complex *Descriptor // 复杂类型: 枚举或者结构体
 
@@ -54,8 +44,7 @@ type FieldDescriptor struct {
 
 func NewFieldDescriptor() *FieldDescriptor {
 	return &FieldDescriptor{
-		Permission: FieldPermission_ClientServer,
-		Meta:       NewMetaInfo(),
+		Meta: NewMetaInfo(),
 	}
 }
 
@@ -246,19 +235,31 @@ func (self *FieldDescriptor) ParseType(fileD *FileDescriptor, rawstr string) boo
 	return true
 }
 
-func (self *FieldDescriptor) ParsePermission(permissionstr string) error {
-	switch strings.ToLower(strings.TrimSpace(permissionstr)) {
+func (self *FieldDescriptor) ParsePerm(permstr string) error {
+	perm := strings.ToLower(strings.TrimSpace(permstr))
+
+	switch perm {
 	case "cs", "sc":
-		self.Permission = FieldPermission_ClientServer
+		fallthrough
 	case "c":
-		self.Permission = FieldPermission_Client
+		fallthrough
 	case "s":
-		self.Permission = FieldPermission_Server
+		fallthrough
+	case "":
+		self.Meta.SetString("Perm", perm)
 	default:
-		return fmt.Errorf("field '%s' permission '%s' not support", self.Name, permissionstr)
+		return fmt.Errorf("field '%s' permission '%s' not support", self.Name, permstr)
 	}
 
 	return nil
+}
+
+func (self *FieldDescriptor) MatchPerm(perm Perm) bool {
+	if !self.Meta.ContainKey("Perm") {
+		return true
+	}
+
+	return perm.Match(self.Meta.GetString("Perm"))
 }
 
 func init() {
