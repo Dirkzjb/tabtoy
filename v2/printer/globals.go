@@ -147,7 +147,10 @@ func (self *Globals) AddContent(tab *model.Table) bool {
 
 	// 去掉注释中的回车,避免代码生成错误
 	rowFD.Comment = strings.Replace(localFD.Name, "\n", " ", -1)
-	self.CombineStruct.Add(rowFD)
+	if err := self.CombineStruct.Add(rowFD); err != nil {
+		log.Errorf("%s '%s.%s', %v", i18n.String(i18n.TypeSheet_FieldInvalid), self.CombineStruct.Name, rowFD.Name, err)
+		return false
+	}
 
 	if localFD.RowDescriptor() == nil {
 		panic("row field null:" + localFD.Name)

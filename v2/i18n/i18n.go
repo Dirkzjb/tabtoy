@@ -53,7 +53,7 @@ const (
 	TypeSheet_DuplicatedEnumValue
 	TypeSheet_RowDataSplitedByEmptyLine
 	TypeSheet_ObjectNameEmpty
-	TypeSheet_DuplicateFieldName
+	TypeSheet_FieldInvalid
 	Printer_IgnoredByOutputTag
 	Printer_OpenWriteOutputFileFailed
 	Printer_IgnoredByTablePerm

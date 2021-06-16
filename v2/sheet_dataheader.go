@@ -234,8 +234,10 @@ func (self *DataHeader) makeRowDescriptor(fileD *model.FileDescriptor, rootField
 
 	// 将表格中的列添加到类型中, 方便导出
 	for _, field := range rootField {
-
-		rowType.Add(field)
+		if err := rowType.Add(field); err != nil {
+			log.Errorf("%s '%s.%s', %v", i18n.String(i18n.TypeSheet_FieldInvalid), rowType.Name, field.Name, err)
+			return false
+		}
 	}
 
 	return true

@@ -36,6 +36,7 @@ type Descriptor struct {
 var (
 	ErrDuplicateFieldName = errors.New("Duplicate field name")
 	ErrDuplicateIndexName = errors.New("Duplicate index name")
+	ErrIndexTypeInvalid   = errors.New("Index type Invalid")
 )
 
 func (self *Descriptor) Add(def *FieldDescriptor) error {
@@ -56,6 +57,11 @@ func (self *Descriptor) Add(def *FieldDescriptor) error {
 	if def.Meta.GetBool("MakeIndex") {
 		// 索引字段无视权限
 		def.Meta.SetString("Perm", "cs")
+
+		// 索引字段类型限制
+		if def.Type == FieldType_Json || def.Type == FieldType_Struct || def.Type == FieldType_Table {
+			return ErrIndexTypeInvalid
+		}
 
 		if _, ok := self.IndexByName[def.Name]; ok {
 			return ErrDuplicateIndexName

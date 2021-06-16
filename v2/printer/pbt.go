@@ -1,6 +1,8 @@
 package printer
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/Dirkzjb/tabtoy/util"
 	"github.com/Dirkzjb/tabtoy/v2/i18n"
 	"github.com/Dirkzjb/tabtoy/v2/model"
@@ -11,6 +13,11 @@ func valueWrapperPbt(t model.FieldType, node *model.Node) string {
 	switch t {
 	case model.FieldType_String:
 		return util.StringWrap(util.StringEscape(node.Value))
+	case model.FieldType_Json:
+		var t interface{}
+		if err := json.Unmarshal([]byte(node.Value), &t); err != nil {
+			panic(fmt.Sprintf("json syntax invalid, %s", node.Value))
+		}
 	}
 
 	return node.Value

@@ -19,6 +19,7 @@ const (
 	FieldType_Enum   FieldType = 8
 	FieldType_Struct FieldType = 9
 	FieldType_Table  FieldType = 10 // 表格, 仅限二进制使用
+	FieldType_Json   FieldType = 11
 )
 
 // 一列的描述
@@ -144,7 +145,6 @@ func (self *FieldDescriptor) DefaultValue() string {
 		}
 
 		return self.Complex.Fields[0].Name
-
 	}
 
 	return ""
@@ -166,12 +166,12 @@ var strByFieldDescriptor = map[FieldType]string{
 	FieldType_Int64:  "int64",
 	FieldType_UInt32: "uint32",
 	FieldType_UInt64: "uint64",
-
 	FieldType_Float:  "float",
 	FieldType_String: "string",
 	FieldType_Bool:   "bool",
 	FieldType_Enum:   "enum",
 	FieldType_Struct: "struct",
+	FieldType_Json:   "json",
 }
 
 var fieldTypeByString = make(map[string]FieldType)
@@ -213,6 +213,10 @@ func (self *FieldDescriptor) ParseType(fileD *FileDescriptor, rawstr string) boo
 	}
 
 	if ft, ok := ParseFieldType(puretype); ok {
+		if self.IsRepeated && ft == FieldType_Json {
+			return false
+		}
+
 		self.Type = ft
 		return true
 	}

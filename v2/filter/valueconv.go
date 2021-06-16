@@ -129,6 +129,10 @@ func ConvertValue(fd *model.FieldDescriptor, value string, fileD *model.FileDesc
 			}
 		}
 
+	case model.FieldType_Json:
+		ret = value
+		node.AddValue(ret)
+
 	default:
 		log.Errorf("%s, '%s' '%s'", i18n.String(i18n.ConvertValue_UnknownFieldType), fd.Name, fd.Name)
 		return "", false

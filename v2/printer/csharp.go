@@ -162,7 +162,6 @@ func (self indexField) IndexType() string {
 	case model.FieldType_Bool:
 		return "bool"
 	case model.FieldType_Enum:
-
 		return self.Index.Complex.Name
 	default:
 		log.Errorf("%s can not be index ", self.Index.String())
@@ -234,6 +233,9 @@ func (self csharpField) ReadCode() string {
 		}
 
 		baseType = fmt.Sprintf("Struct<%s>", self.Complex.Name)
+
+	case model.FieldType_Json:
+		baseType = "String"
 
 	}
 
@@ -315,6 +317,9 @@ func (self csharpField) TypeCode() string {
 			return fmt.Sprintf("public %s %s = new %s();", raw, self.Name, raw)
 		}
 
+	case model.FieldType_Json:
+		raw = "string"
+
 	default:
 		raw = "unknown"
 	}
@@ -330,6 +335,8 @@ func wrapCSharpDefaultValue(fd *model.FieldDescriptor) string {
 	switch fd.Type {
 	case model.FieldType_Enum:
 		return fmt.Sprintf("%s.%s", fd.Complex.Name, fd.DefaultValue())
+	case model.FieldType_Json:
+		fallthrough
 	case model.FieldType_String:
 		return fmt.Sprintf("\"%s\"", fd.DefaultValue())
 	case model.FieldType_Float:

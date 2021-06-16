@@ -49,7 +49,7 @@ func init() {
 		TypeSheet_DuplicatedEnumValue:                         "[TT711] TypeSheet: Duplicated enum value",
 		TypeSheet_RowDataSplitedByEmptyLine:                   "[TT712] TypeSheet: Row data splited by empty line",
 		TypeSheet_ObjectNameEmpty:                             "[TT713] TypeSheet: 'ObjectName' is empty",
-		TypeSheet_DuplicateFieldName:                          "[TT714] TypeSheet: Duplicate field name",
+		TypeSheet_FieldInvalid:                                "[TT714] TypeSheet: field Invalid",
 		Printer_IgnoredByOutputTag:                            "[TT801] Printer: Ignored by 'OutputTag' in @Types",
 		Printer_OpenWriteOutputFileFailed:                     "[TT802] Printer: Open write output file failed,",
 		Printer_IgnoredByTablePerm:                            "[TT803] Printer: Ignored by 'Perm' in @Types",

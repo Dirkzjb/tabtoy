@@ -3,6 +3,7 @@ package printer
 import (
 	"bytes"
 	"encoding/binary"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"strconv"
@@ -100,6 +101,12 @@ func (self *Stream) WriteNodeValue(ft model.FieldType, value *model.Node) {
 		self.WriteString(value.Value)
 	case model.FieldType_Enum:
 		binary.Write(&self.buf, binary.LittleEndian, value.EnumValue)
+	case model.FieldType_Json:
+		var t interface{}
+		if err := json.Unmarshal([]byte(value.Value), &t); err != nil {
+			panic(fmt.Sprintf("json syntax invalid, %s", value.Value))
+		}
+		self.WriteString(value.Value)
 	default:
 		panic("unsupport type" + model.FieldTypeToString(ft))
 	}

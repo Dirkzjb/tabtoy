@@ -288,6 +288,11 @@ func (self *goFieldModel) KeyType() string {
 		return self.Complex.Name
 	}
 
+	if self.Type == model.FieldType_Json {
+		log.Errorf("%s can not be index ", self.String())
+		return "unknown"
+	}
+
 	return model.FieldTypeToString(self.Type)
 }
 
@@ -328,6 +333,8 @@ func (self *goFieldModel) ElementTypeString() string {
 		return "float32"
 	case model.FieldType_Struct:
 		return "*" + self.FieldDescriptor.TypeString()
+	case model.FieldType_Json:
+		return "interface{}"
 	default:
 		return self.FieldDescriptor.TypeString()
 	}

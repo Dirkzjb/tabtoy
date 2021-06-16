@@ -180,8 +180,8 @@ func (self *typeModelRoot) ParseData(localFD *model.FileDescriptor, globalFD *mo
 			m.fd.Meta.SetString("Default", rawDefault)
 		}
 
-		if td.Add(m.fd) != nil {
-			log.Errorf("%s '%s'", i18n.String(i18n.TypeSheet_DuplicateFieldName), m.fd.Name)
+		if err := td.Add(m.fd); err != nil {
+			log.Errorf("%s '%s.%s', %v", i18n.String(i18n.TypeSheet_FieldInvalid), localFD.Name, m.fd.Name, err)
 			return false
 		}
 
