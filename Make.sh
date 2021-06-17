@@ -15,7 +15,7 @@ BuildBinary()
   GitCommit=$(git rev-parse HEAD)
   VersionString="-X \"${BuildSourcePackage}.BuildTime=${BuildTime}\" -X \"${BuildSourcePackage}.Version=${Version}\" -X \"${BuildSourcePackage}.GitCommit=${GitCommit}\""
 
-  go build -v -p 4 -o "${TargetDir}"/tabtoy -ldflags "${VersionString}" github.com/davyxu/tabtoy
+  go build -v -p 4 -o "${TargetDir}"/tabtoy -ldflags "${VersionString}" github.com/Dirkzjb/tabtoy
   PackageDir=$(pwd)
   cd "${TargetDir}"
   tar zcvf "${PackageDir}"/tabtoy-${Version}-"${1}"-x86_64.tar.gz tabtoy
