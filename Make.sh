@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-Version=3.1.1
+Version=1.0.0
 
 export GOARCH=amd64
 export GOPROXY=http://goproxy.cn
-BuildSourcePackage="github.com/davyxu/tabtoy/build"
+BuildSourcePackage="github.com/Dirkzjb/tabtoy/build"
 
 BuildBinary()
 {
